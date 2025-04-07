@@ -7,3 +7,9 @@ export const BaseDatePicker: React.FC<IProps> = (props) => {
 
   return <DatePicker {...otherProps} />;
 };
+
+export const BaseMonthPicker: React.FC<IProps> = (props) => {
+  const { ...otherProps } = props;
+
+  return <DatePicker.MonthPicker {...otherProps} />;
+};

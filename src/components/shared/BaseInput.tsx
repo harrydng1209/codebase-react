@@ -1,38 +1,22 @@
 import { Input, InputProps, InputRef } from 'antd';
-import { HTMLInputTypeAttribute } from 'react';
+import { TextAreaProps } from 'antd/es/input';
 
-interface IProps extends InputProps {
-  type?: HTMLInputTypeAttribute;
-}
+interface IInputProps extends InputProps {}
+interface ITextAreaProps extends TextAreaProps {}
 
-const { Password, Search, TextArea } = Input;
+export const BaseInput = forwardRef<InputRef, IInputProps>((props, ref) => {
+  const { type, ...otherProps } = props;
 
-export const BaseInput = forwardRef<InputRef, IProps>((props, ref) => {
-  const { children, type, ...otherProps } = props;
+  if (type === 'password') return <Input.Password ref={ref} {...otherProps} />;
+  if (type === 'search') return <Input.Search ref={ref} {...otherProps} />;
 
-  if (type === 'password') {
-    return (
-      <Password ref={ref} {...otherProps}>
-        {children}
-      </Password>
-    );
-  }
-
-  if (type === 'search') {
-    return (
-      <Search ref={ref} {...otherProps}>
-        {children}
-      </Search>
-    );
-  }
-
-  if (type === 'textarea') {
-    return <TextArea ref={ref}>{children}</TextArea>;
-  }
-
-  return (
-    <Input ref={ref} {...otherProps}>
-      {children}
-    </Input>
-  );
+  return <Input ref={ref} {...otherProps} />;
 });
+
+export const BaseInputArea = forwardRef<InputRef, ITextAreaProps>(
+  (props, ref) => {
+    const { ...otherProps } = props;
+
+    return <Input.TextArea ref={ref} {...otherProps} />;
+  },
+);

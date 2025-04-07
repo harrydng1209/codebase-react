@@ -1,20 +1,12 @@
 import { Table, TableProps } from 'antd';
+import { ColumnType } from 'antd/es/table';
 
-interface IProps extends TableProps {
-  columns: Record<string, unknown>[];
-  data: Record<string, unknown>[];
+interface IProps<T> extends TableProps<T> {
+  columns: ColumnType<T>[];
 }
 
-export const BaseTable: React.FC<IProps> = (props) => {
-  const { columns, data, ...otherProps } = props;
+export const BaseTable = <T,>(props: IProps<T>) => {
+  const { ...otherProps } = props;
 
-  return (
-    <Table
-      bordered
-      columns={columns}
-      dataSource={data}
-      pagination={false}
-      {...otherProps}
-    />
-  );
+  return <Table<T> {...otherProps} />;
 };

@@ -5,9 +5,5 @@ interface IProps extends ModalProps {}
 export const BaseModal: React.FC<IProps> = (props) => {
   const { children, ...otherProps } = props;
 
-  return (
-    <Modal closable={false} {...otherProps}>
-      {children}
-    </Modal>
-  );
+  return <Modal {...otherProps}>{children}</Modal>;
 };

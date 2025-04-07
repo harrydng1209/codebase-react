@@ -71,8 +71,7 @@ export const BaseComponents: React.FC = () => {
   const schema = yupObject({
     email: yupString()
       .required('Email is required')
-      .email('Invalid email format')
-      .matches(REGEXES.EMAIL, 'Custom email regex validation failed'),
+      .matches(REGEXES.EMAIL, 'Invalid email format'),
     fullName: yupString()
       .required('Full name is required')
       .matches(
@@ -530,7 +529,7 @@ export const BaseComponents: React.FC = () => {
         <h4>-- Base Tables --</h4>
         <BaseTable
           columns={tableColumns}
-          data={tableData}
+          dataSource={tableData}
           rowKey="id"
           scroll={{ y: 300 }}
         />

@@ -5,8 +5,6 @@ import { useWindowScroll } from '@/hooks/shared/use-window-scroll';
 import { Layout } from 'antd';
 import { Outlet } from 'react-router';
 
-const { Content, Header, Sider } = Layout;
-
 export const DefaultLayout: React.FC = () => {
   const { y } = useWindowScroll();
 
@@ -17,21 +15,21 @@ export const DefaultLayout: React.FC = () => {
 
   return (
     <Layout className={styles['container']}>
-      <Sider className={styles['container__sidebar']} width={270}>
+      <Layout.Sider className={styles['container__sidebar']} width={270}>
         <TheSidebar />
-      </Sider>
+      </Layout.Sider>
 
       <Layout className={styles['container__main']}>
-        <Header
+        <Layout.Header
           className={styles['container__main--header']}
           style={headerStyle}
         >
           <TheTopbar />
-        </Header>
+        </Layout.Header>
 
-        <Content className={styles['container__main--content']}>
+        <Layout.Content className={styles['container__main--content']}>
           <Outlet />
-        </Content>
+        </Layout.Content>
       </Layout>
     </Layout>
   );

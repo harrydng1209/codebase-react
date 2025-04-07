@@ -35,8 +35,7 @@ export const authStore = create<IState>()(
       initialize: async () => {
         if (get().isAuthenticated) return;
 
-        const accessToken = get().accessToken;
-        const isLoggedIn = Boolean(accessToken);
+        const isLoggedIn = Boolean(get().accessToken);
         if (!isLoggedIn) return;
 
         try {
