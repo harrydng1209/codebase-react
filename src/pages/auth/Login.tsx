@@ -4,6 +4,7 @@ import IconEyeClosed from '@/assets/icons/modules/auth/IconEyeClosed.svg?react';
 import IconRequired from '@/assets/icons/shared/IconRequired.svg?react';
 import styles from '@/assets/styles/components/auth/login.module.scss';
 import { BaseButton } from '@/components/shared/BaseButton';
+import { BaseFormItem } from '@/components/shared/BaseFormItem';
 import { BaseInput } from '@/components/shared/BaseInput';
 import { AUTH_PAGES, HOME } from '@/constants/route-pages.const';
 import { REGEXES, SELECTORS } from '@/constants/shared.const';
@@ -11,8 +12,7 @@ import { ILoginRequest } from '@/models/interfaces/auth.interface';
 import { useAuthStore } from '@/stores/auth.store';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form } from 'antd';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormItem } from 'react-hook-form-antd';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import { object as yupObject, string as yupString } from 'yup';
 
@@ -25,7 +25,7 @@ export const Login: React.FC = () => {
       .required('Password is required')
       .min(6, 'Password must be at least 6 characters long'),
   });
-  const { control, handleSubmit } = useForm<ILoginRequest>({
+  const loginForm = useForm<ILoginRequest>({
     defaultValues: {
       email: '',
       password: '',
@@ -64,41 +64,41 @@ export const Login: React.FC = () => {
       <section id={SELECTORS.LOGIN_SECTION}>
         <h4>{t('auth.login')}</h4>
 
-        <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
-          <FormItem
-            control={control}
-            label={
-              <>
-                <span>{t('auth.email')}</span>
-                <IconRequired className="tw-ml-1" height="10" width="5" />
-              </>
-            }
-            name="email"
-          >
-            <BaseInput placeholder="name@email.com" type="text" />
-          </FormItem>
+        <FormProvider {...loginForm}>
+          <Form layout="vertical" onFinish={loginForm.handleSubmit(onSubmit)}>
+            <BaseFormItem
+              label={
+                <>
+                  <span>{t('auth.email')}</span>
+                  <IconRequired className="tw-ml-1" height="10" width="5" />
+                </>
+              }
+              name="email"
+            >
+              <BaseInput placeholder="name@email.com" type="text" />
+            </BaseFormItem>
 
-          <FormItem
-            control={control}
-            label={
-              <>
-                <span>{t('auth.password')}</span>
-                <IconRequired className="tw-ml-1" height="10" width="5" />
-              </>
-            }
-            name="password"
-          >
-            <BaseInput
-              placeholder={t('auth.inputPassword')}
-              suffix={renderIcon(togglePasswordVisibility)}
-              type={showPassword ? 'text' : 'password'}
-            />
-          </FormItem>
+            <BaseFormItem
+              label={
+                <>
+                  <span>{t('auth.password')}</span>
+                  <IconRequired className="tw-ml-1" height="10" width="5" />
+                </>
+              }
+              name="password"
+            >
+              <BaseInput
+                placeholder={t('auth.inputPassword')}
+                suffix={renderIcon(togglePasswordVisibility)}
+                type={showPassword ? 'text' : 'password'}
+              />
+            </BaseFormItem>
 
-          <BaseButton className="tw-w-full tw-mt-2" htmlType="submit">
-            {t('auth.login')}
-          </BaseButton>
-        </Form>
+            <BaseButton className="tw-w-full tw-mt-2" htmlType="submit">
+              {t('auth.login')}
+            </BaseButton>
+          </Form>
+        </FormProvider>
 
         <div className={styles['container__register-now']}>
           <p>{t('auth.noAccount')}</p>

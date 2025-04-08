@@ -11,6 +11,7 @@ import { BaseButton } from '@/components/shared/BaseButton';
 import { BaseCheckbox } from '@/components/shared/BaseCheckbox';
 import { BaseCheckboxGroup } from '@/components/shared/BaseCheckboxGroup';
 import { BaseDatePicker } from '@/components/shared/BaseDatePicker';
+import { BaseFormItem } from '@/components/shared/BaseFormItem';
 import { BaseInput } from '@/components/shared/BaseInput';
 import { BaseInputNumber } from '@/components/shared/BaseInputNumber';
 import { BaseModal } from '@/components/shared/BaseModal';
@@ -43,8 +44,7 @@ import {
 } from 'antd';
 import { DefaultOptionType } from 'antd/es/select';
 import { Dayjs } from 'dayjs';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormItem } from 'react-hook-form-antd';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useDebounceCallback } from 'usehooks-ts';
 import {
   boolean as yupBoolean,
@@ -89,7 +89,7 @@ export const BaseComponents: React.FC = () => {
       .isTrue('You must agree to the terms and conditions'),
     type: yupString().required('Account type is required'),
   });
-  const { control, handleSubmit, reset } = useForm<IForm>({
+  const baseComponentsForm = useForm<IForm>({
     defaultValues: {
       email: '',
       fullName: '',
@@ -546,69 +546,62 @@ export const BaseComponents: React.FC = () => {
 
       <section>
         <h4>-- Base Forms --</h4>
-        <Form
-          layout="vertical"
-          onFinish={handleSubmit(onSubmit)}
-          style={{ maxWidth: '600px' }}
-        >
-          <div className="tw-grid tw-grid-cols-2 tw-gap-4">
-            <FormItem
-              control={control}
-              label="Full Name"
-              name="fullName"
-              required
-            >
-              <BaseInput placeholder="Enter your full name" />
-            </FormItem>
-
-            <FormItem control={control} label="Type" name="type" required>
-              <BaseSelect
-                options={baseSelectOptions}
-                placeholder="Choose a type"
-              />
-            </FormItem>
-          </div>
-
-          <div className="tw-grid tw-grid-cols-3 tw-gap-4">
-            <FormItem control={control} label="Email" name="email" required>
-              <BaseInput placeholder="Enter your email address" />
-            </FormItem>
-
-            <FormItem
-              control={control}
-              label="Password"
-              name="password"
-              required
-            >
-              <BaseInput placeholder="Create a password" type="password" />
-            </FormItem>
-
-            <FormItem
-              control={control}
-              label="Confirm Password"
-              name="passwordConfirm"
-              required
-            >
-              <BaseInput placeholder="Re-enter your password" type="password" />
-            </FormItem>
-          </div>
-
-          <FormItem
-            control={control}
-            name="terms"
-            required
-            valuePropName="checked"
+        <FormProvider {...baseComponentsForm}>
+          <Form
+            layout="vertical"
+            onFinish={baseComponentsForm.handleSubmit(onSubmit)}
+            style={{ maxWidth: '600px' }}
           >
-            <BaseCheckbox>Agree to terms and conditions</BaseCheckbox>
-          </FormItem>
+            <div className="tw-grid tw-grid-cols-2 tw-gap-4">
+              <BaseFormItem label="Full Name" name="fullName" required>
+                <BaseInput placeholder="Enter your full name" />
+              </BaseFormItem>
 
-          <div className="tw-flex tw-gap-2">
-            <BaseButton htmlType="submit">Submit</BaseButton>
-            <BaseButton color="default" onClick={() => reset()}>
-              Reset
-            </BaseButton>
-          </div>
-        </Form>
+              <BaseFormItem label="Type" name="type" required>
+                <BaseSelect
+                  options={baseSelectOptions}
+                  placeholder="Choose a type"
+                />
+              </BaseFormItem>
+            </div>
+
+            <div className="tw-grid tw-grid-cols-3 tw-gap-4">
+              <BaseFormItem label="Email" name="email" required>
+                <BaseInput placeholder="Enter your email address" />
+              </BaseFormItem>
+
+              <BaseFormItem label="Password" name="password" required>
+                <BaseInput placeholder="Create a password" type="password" />
+              </BaseFormItem>
+
+              <BaseFormItem
+                label="Confirm Password"
+                name="passwordConfirm"
+                required
+              >
+                <BaseInput
+                  placeholder="Re-enter your password"
+                  type="password"
+                />
+              </BaseFormItem>
+            </div>
+
+            <BaseFormItem name="terms" required valuePropName="checked">
+              <BaseCheckbox>Agree to terms and conditions</BaseCheckbox>
+            </BaseFormItem>
+
+            <div className="tw-flex tw-gap-2">
+              <BaseButton htmlType="submit">Submit</BaseButton>
+              <BaseButton
+                color="default"
+                onClick={() => baseComponentsForm.reset()}
+                type="default"
+              >
+                Reset
+              </BaseButton>
+            </div>
+          </Form>
+        </FormProvider>
       </section>
     </div>
   );

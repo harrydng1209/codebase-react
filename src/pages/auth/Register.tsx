@@ -4,6 +4,7 @@ import IconEyeClosed from '@/assets/icons/modules/auth/IconEyeClosed.svg?react';
 import IconRequired from '@/assets/icons/shared/IconRequired.svg?react';
 import styles from '@/assets/styles/components/auth/register.module.scss';
 import { BaseButton } from '@/components/shared/BaseButton';
+import { BaseFormItem } from '@/components/shared/BaseFormItem';
 import { BaseInput } from '@/components/shared/BaseInput';
 import { AUTH_PAGES } from '@/constants/route-pages.const';
 import { REGEXES, SELECTORS } from '@/constants/shared.const';
@@ -11,8 +12,7 @@ import { useHandleCatchError } from '@/hooks/shared/use-handle-catch-error';
 import { IRegister } from '@/models/interfaces/auth.interface';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form } from 'antd';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormItem } from 'react-hook-form-antd';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import { object as yupObject, ref as yupRef, string as yupString } from 'yup';
 
@@ -40,7 +40,7 @@ export const Register: React.FC = () => {
         'Username can only contain letters and numbers',
       ),
   });
-  const { control, handleSubmit, setError } = useForm<IRegister>({
+  const registerForm = useForm<IRegister>({
     defaultValues: {
       displayName: '',
       email: '',
@@ -76,7 +76,7 @@ export const Register: React.FC = () => {
       );
       if (errorData?.fields)
         errorData.fields.forEach((field) => {
-          setError(field, {
+          registerForm.setError(field, {
             message: `${field} is already taken`,
             type: 'manual',
           });
@@ -94,84 +94,84 @@ export const Register: React.FC = () => {
       <section id={SELECTORS.REGISTER_SECTION}>
         <h4>{t('auth.register')}</h4>
 
-        <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
-          <FormItem
-            control={control}
-            label={
-              <>
-                <span>{t('auth.email')}</span>
-                <IconRequired className="tw-ml-1" height="10" width="5" />
-              </>
-            }
-            name="email"
+        <FormProvider {...registerForm}>
+          <Form
+            layout="vertical"
+            onFinish={registerForm.handleSubmit(onSubmit)}
           >
-            <BaseInput placeholder="name@email.com" />
-          </FormItem>
+            <BaseFormItem
+              label={
+                <>
+                  <span>{t('auth.email')}</span>
+                  <IconRequired className="tw-ml-1" height="10" width="5" />
+                </>
+              }
+              name="email"
+            >
+              <BaseInput placeholder="name@email.com" />
+            </BaseFormItem>
 
-          <FormItem
-            control={control}
-            label={
-              <>
-                <span>{t('auth.password')}</span>
-                <IconRequired className="tw-ml-1" height="10" width="5" />
-              </>
-            }
-            name="password"
-          >
-            <BaseInput
-              placeholder={t('auth.inputPassword')}
-              suffix={renderIcon(togglePasswordVisibility)}
-              type={showPassword ? 'text' : 'password'}
-            />
-          </FormItem>
+            <BaseFormItem
+              label={
+                <>
+                  <span>{t('auth.password')}</span>
+                  <IconRequired className="tw-ml-1" height="10" width="5" />
+                </>
+              }
+              name="password"
+            >
+              <BaseInput
+                placeholder={t('auth.inputPassword')}
+                suffix={renderIcon(togglePasswordVisibility)}
+                type={showPassword ? 'text' : 'password'}
+              />
+            </BaseFormItem>
 
-          <FormItem
-            control={control}
-            label={
-              <>
-                <span>{t('auth.passwordConfirm')}</span>
-                <IconRequired className="tw-ml-1" height="10" width="5" />
-              </>
-            }
-            name="passwordConfirm"
-          >
-            <BaseInput
-              placeholder={t('auth.inputPassword')}
-              suffix={renderIcon(togglePasswordConfirmVisibility)}
-              type={showPassword ? 'text' : 'password'}
-            />
-          </FormItem>
+            <BaseFormItem
+              label={
+                <>
+                  <span>{t('auth.passwordConfirm')}</span>
+                  <IconRequired className="tw-ml-1" height="10" width="5" />
+                </>
+              }
+              name="passwordConfirm"
+            >
+              <BaseInput
+                placeholder={t('auth.inputPassword')}
+                suffix={renderIcon(togglePasswordConfirmVisibility)}
+                type={showPasswordConfirm ? 'text' : 'password'}
+              />
+            </BaseFormItem>
 
-          <FormItem
-            control={control}
-            label={
-              <>
-                <span>{t('auth.username')}</span>
-                <IconRequired className="tw-ml-1" height="10" width="5" />
-              </>
-            }
-            name="username"
-          >
-            <BaseInput placeholder={t('auth.enterYourUsername')} />
-          </FormItem>
+            <BaseFormItem
+              label={
+                <>
+                  <span>{t('auth.username')}</span>
+                  <IconRequired className="tw-ml-1" height="10" width="5" />
+                </>
+              }
+              name="username"
+            >
+              <BaseInput placeholder={t('auth.enterYourUsername')} />
+            </BaseFormItem>
 
-          <FormItem
-            control={control}
-            label={
-              <>
-                <span>{t('auth.displayName')}</span>
-                <IconRequired className="tw-ml-1" height="10" width="5" />
-              </>
-            }
-            name="displayName"
-          >
-            <BaseInput placeholder={t('auth.enterYourDisplayName')} />
-          </FormItem>
+            <BaseFormItem
+              label={
+                <>
+                  <span>{t('auth.displayName')}</span>
+                  <IconRequired className="tw-ml-1" height="10" width="5" />
+                </>
+              }
+              name="displayName"
+            >
+              <BaseInput placeholder={t('auth.enterYourDisplayName')} />
+            </BaseFormItem>
 
-          <BaseButton className="tw-w-full tw-mt-2" htmlType="submit">
-            {t('auth.register')}
-          </BaseButton>
-        </Form>
+            <BaseButton className="tw-w-full tw-mt-2" htmlType="submit">
+              {t('auth.register')}
+            </BaseButton>
+          </Form>
+        </FormProvider>
 
         <div className={styles['container__login-now']}>
           <p>{t('auth.hasAccount')}</p>
