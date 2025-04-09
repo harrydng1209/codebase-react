@@ -4,7 +4,7 @@ export const AUTH_PAGES = {
   ROOT: '/auth',
 } as const;
 
-export const BASE_COMPONENTS = '/base-components';
+export const CODEBASE = '/codebase';
 export const FORBIDDEN = '/access-denied';
 export const HOME = '/';
 export const NOT_FOUND = '/doesnt-exist';

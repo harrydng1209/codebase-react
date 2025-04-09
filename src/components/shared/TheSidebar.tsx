@@ -3,7 +3,7 @@ import IconFolderShared from '@/assets/icons/shared/IconFolderShared.svg?react';
 import IconLogo from '@/assets/icons/shared/IconLogo.svg?react';
 import IconSettings from '@/assets/icons/shared/IconSettings.svg?react';
 import styles from '@/assets/styles/components/the-sidebar.module.scss';
-import { BASE_COMPONENTS, HOME } from '@/constants/route-pages.const';
+import { CODEBASE, HOME } from '@/constants/route-pages.const';
 import { AUTH_PAGES } from '@/constants/route-pages.const';
 import { useTheme } from '@/hooks/shared/use-theme';
 import { useThemeColor } from '@/hooks/shared/use-theme-color';
@@ -30,8 +30,8 @@ export const TheSidebar: React.FC = () => {
     },
     {
       icon: <IconFolderShared fill={getThemeColor('ICON_SVG')} />,
-      key: BASE_COMPONENTS,
-      label: t('shared.navigator.base-components'),
+      key: CODEBASE,
+      label: t('shared.navigator.codebase'),
     },
   ];
   const selectedKey =

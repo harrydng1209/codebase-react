@@ -1,15 +1,15 @@
-import { BASE_COMPONENTS } from '@/constants/route-pages.const';
+import { CODEBASE } from '@/constants/route-pages.const';
 import { NODE_ENVS } from '@/constants/shared.const';
 import { DefaultLayout } from '@/layouts/DefaultLayout';
 import { ErrorLayout } from '@/layouts/ErrorLayout';
-import { BaseComponents } from '@/pages/BaseComponents';
+import { Codebase } from '@/pages/Codebase';
 
 const isDevelop = import.meta.env.VITE_NODE_ENV === NODE_ENVS.DEVELOP;
 
 export default {
   children: [
     {
-      element: <BaseComponents />,
+      element: <Codebase />,
       index: true,
     },
   ],
@@ -17,7 +17,7 @@ export default {
   meta: {
     requiresAuth: true,
     roles: [],
-    title: 'Base Components',
+    title: 'Codebase',
   },
-  path: BASE_COMPONENTS,
+  path: CODEBASE,
 };

@@ -5,7 +5,7 @@ import IconFolderShared from '@/assets/icons/shared/IconFolderShared.svg?react';
 import IconNotification from '@/assets/icons/shared/IconNotification.svg?react';
 import IconSearch from '@/assets/icons/shared/IconSearch.svg?react';
 import IconSettings from '@/assets/icons/shared/IconSettings.svg?react';
-import styles from '@/assets/styles/components/base-components.module.scss';
+import styles from '@/assets/styles/components/codebase.module.scss';
 import { BaseAutocomplete } from '@/components/shared/BaseAutocomplete';
 import { BaseButton } from '@/components/shared/BaseButton';
 import { BaseCheckbox } from '@/components/shared/BaseCheckbox';
@@ -29,7 +29,7 @@ import {
   suggestions,
   tableColumns,
   tableData,
-} from '@/mocks/base-components.mock';
+} from '@/mocks/codebase.mock';
 import { EToast } from '@/models/enums/shared.enum';
 import { useLoadingStore } from '@/stores/loading.store';
 import { showToast, sleep } from '@/utils/shared.util';
@@ -67,7 +67,7 @@ type TIcons = Record<
   { default: React.FC<React.SVGProps<SVGSVGElement>> }
 >;
 
-export const BaseComponents: React.FC = () => {
+export const Codebase: React.FC = () => {
   const schema = yupObject({
     email: yupString()
       .required('Email is required')
@@ -89,7 +89,7 @@ export const BaseComponents: React.FC = () => {
       .isTrue('You must agree to the terms and conditions'),
     type: yupString().required('Account type is required'),
   });
-  const baseComponentsForm = useForm<IForm>({
+  const codebaseForm = useForm<IForm>({
     defaultValues: {
       email: '',
       fullName: '',
@@ -546,10 +546,10 @@ export const BaseComponents: React.FC = () => {
 
       <section>
         <h4>-- Base Forms --</h4>
-        <FormProvider {...baseComponentsForm}>
+        <FormProvider {...codebaseForm}>
           <Form
             layout="vertical"
-            onFinish={baseComponentsForm.handleSubmit(onSubmit)}
+            onFinish={codebaseForm.handleSubmit(onSubmit)}
             style={{ maxWidth: '600px' }}
           >
             <div className="tw-grid tw-grid-cols-2 tw-gap-4">
@@ -594,7 +594,7 @@ export const BaseComponents: React.FC = () => {
               <BaseButton htmlType="submit">Submit</BaseButton>
               <BaseButton
                 color="default"
-                onClick={() => baseComponentsForm.reset()}
+                onClick={() => codebaseForm.reset()}
                 type="default"
               >
                 Reset
