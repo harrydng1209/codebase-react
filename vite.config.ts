@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react-swc';
 import { fileURLToPath, URL } from 'node:url';
-import autoImport from 'unplugin-auto-import/vite';
+import autoImports from 'unplugin-auto-import/vite';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
@@ -20,7 +20,7 @@ export default defineConfig({
     react(),
     svgr(),
 
-    autoImport({
+    autoImports({
       dirs: [
         'src/apis/**',
         'src/constants/**',
