@@ -15,5 +15,23 @@
     "enterYourDisplayName": "Enter your display name",
     "hasAccount": "You already have an account!",
     "loginNow": "Login now"
+  },
+  "shared": {
+    "hello": "Hello",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "search": "Search",
+
+    "navigator": {
+      "home": "Home",
+      "login": "Login",
+      "register": "Register",
+      "codebase": "Codebase"
+    },
+
+    "button": {
+      "ok": "OK",
+      "cancel": "Cancel"
+    }
   }
 }

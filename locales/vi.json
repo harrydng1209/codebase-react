@@ -15,5 +15,23 @@
     "enterYourDisplayName": "Nhập tên hiển thị của bạn",
     "hasAccount": "Bạn đã có tài khoản!",
     "loginNow": "Đăng nhập ngay"
+  },
+  "shared": {
+    "hello": "Xin chào",
+    "dashboard": "Bảng điều khiển",
+    "settings": "Cài đặt",
+    "search": "Tìm kiếm",
+
+    "navigator": {
+      "home": "Trang chủ",
+      "login": "Đăng nhập",
+      "register": "Đăng ký",
+      "codebase": "Thành phần cơ sở"
+    },
+
+    "button": {
+      "ok": "Đồng ý",
+      "cancel": "Hủy"
+    }
   }
 }

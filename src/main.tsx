@@ -1,5 +1,5 @@
 import '@/assets/styles/root/main.scss';
-import '@/plugins/react-i18next.plugin.ts';
+import '@/plugins/react-i18next.plugin';
 import { App } from '@/App.tsx';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
