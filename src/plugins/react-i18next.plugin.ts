@@ -1,7 +1,7 @@
 import type { TObjectString } from '@/models/types/shared.type';
 
 import { ELanguageCode } from '@/models/enums/shared.enum';
-import i18n from 'i18next';
+import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 type TLocales = Record<string, { default: TObjectString }>;
@@ -34,10 +34,12 @@ Object.keys(locales).forEach((path) => {
   Object.assign(resources[locale].translation, data);
 });
 
-export default i18n.use(initReactI18next).init({
+i18next.use(initReactI18next).init({
   interpolation: {
     escapeValue: false,
   },
   lng: ELanguageCode.English,
   resources,
 });
+
+export default i18next;

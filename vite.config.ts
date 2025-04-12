@@ -27,6 +27,7 @@ export default defineConfig({
         'src/hooks/shared/**',
         'src/utils/**',
       ],
+
       dts: 'src/@types/auto-imports.d.ts',
 
       eslintrc: {
