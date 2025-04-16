@@ -274,25 +274,31 @@ export const Codebase: React.FC = () => {
       <section>
         <h4>-- Base Buttons --</h4>
         <div className="tw-flex tw-gap-2 tw-mb-4">
-          <BaseButton color="primary" onClick={handleClickButton}>
-            Primary
+          <BaseButton onClick={handleClickButton}>Primary</BaseButton>
+          <BaseButton color="blue" onClick={handleClickButton} variant="solid">
+            Blue
           </BaseButton>
-          <BaseButton color="geekblue" onClick={handleClickButton}>
-            Geekblue
-          </BaseButton>
-          <BaseButton color="green" onClick={handleClickButton}>
+          <BaseButton color="green" onClick={handleClickButton} variant="solid">
             Green
           </BaseButton>
-          <BaseButton color="orange" onClick={handleClickButton}>
+          <BaseButton
+            color="orange"
+            onClick={handleClickButton}
+            variant="solid"
+          >
             Orange
           </BaseButton>
-          <BaseButton color="danger" onClick={handleClickButton}>
+          <BaseButton
+            color="danger"
+            onClick={handleClickButton}
+            variant="solid"
+          >
             Danger
           </BaseButton>
           <BaseButton
             color="default"
             onClick={handleClickButton}
-            variant="outlined"
+            variant="solid"
           >
             Default
           </BaseButton>
@@ -307,11 +313,11 @@ export const Codebase: React.FC = () => {
             Primary
           </BaseButton>
           <BaseButton
-            color="geekblue"
+            color="blue"
             onClick={handleClickButton}
             variant="outlined"
           >
-            Geekblue
+            Blue
           </BaseButton>
           <BaseButton
             color="green"
@@ -345,22 +351,23 @@ export const Codebase: React.FC = () => {
 
         <div className="tw-flex tw-gap-2 tw-mb-4">
           <BaseButton
-            color="primary"
             icon={<IconSearch fill={DEFAULT.WHITE} height="14" width="14" />}
             onClick={handleClickButton}
             shape="circle"
           />
           <BaseButton
-            color="geekblue"
+            color="blue"
             icon={<IconSettings fill={DEFAULT.WHITE} height="14" width="14" />}
             onClick={handleClickButton}
             shape="circle"
+            variant="solid"
           />
           <BaseButton
             color="green"
             icon={<IconDashboard fill={DEFAULT.WHITE} height="14" width="14" />}
             onClick={handleClickButton}
             shape="circle"
+            variant="solid"
           />
           <BaseButton
             color="orange"
@@ -369,12 +376,14 @@ export const Codebase: React.FC = () => {
             }
             onClick={handleClickButton}
             shape="circle"
+            variant="solid"
           />
           <BaseButton
             color="danger"
             icon={<IconDelete fill={DEFAULT.WHITE} height="14" width="14" />}
             onClick={handleClickButton}
             shape="circle"
+            variant="solid"
           />
           <BaseButton
             color="default"
