@@ -111,10 +111,11 @@ export const get = async <T = unknown, M = unknown>(
 export const handleUnauthorizedError = async (
   error: AxiosError<TFailureResponse>,
 ) => {
-  const isTokenRefreshed = await authStore.getState().actions.refreshToken();
+  const { actions } = authStore.getState();
+  const isTokenRefreshed = await actions.refreshToken();
 
   if (!isTokenRefreshed) {
-    authStore.getState().actions.logout();
+    actions.logout();
     window.location.href = AUTH_PAGES.LOGIN;
     return;
   }

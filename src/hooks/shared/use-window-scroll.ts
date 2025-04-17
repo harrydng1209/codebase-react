@@ -1,19 +1,20 @@
-export const useWindowScroll = () => {
-  const { addEventListener, removeEventListener, scrollX, scrollY } = window;
+import { useEffect, useState } from 'react';
 
+export const useWindowScroll = () => {
   const [scroll, setScroll] = useState({
-    x: scrollX,
-    y: scrollY,
+    x: 0,
+    y: 0,
   });
 
-  const handleScroll = () => {
-    setScroll({ x: scrollX, y: scrollY });
-  };
-
   useEffect(() => {
-    addEventListener('scroll', handleScroll);
-    return () => removeEventListener('scroll', handleScroll);
-  }, [scrollX, scrollY]);
+    const handleScroll = () => {
+      setScroll({ x: window.scrollX, y: window.scrollY });
+    };
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return scroll;
 };

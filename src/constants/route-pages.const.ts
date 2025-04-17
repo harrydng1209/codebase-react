@@ -5,6 +5,6 @@ export const AUTH_PAGES = {
 } as const;
 
 export const CODEBASE = '/codebase';
-export const FORBIDDEN = '/access-denied';
+export const FORBIDDEN = '/forbidden';
 export const HOME = '/';
-export const NOT_FOUND = '/doesnt-exist';
+export const NOT_FOUND = '/not-found';

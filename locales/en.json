@@ -16,6 +16,7 @@
     "hasAccount": "You already have an account!",
     "loginNow": "Login now"
   },
+
   "shared": {
     "hello": "Hello",
     "dashboard": "Dashboard",

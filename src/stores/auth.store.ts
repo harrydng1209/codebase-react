@@ -1,5 +1,6 @@
 import { profile, refreshToken as refreshTokenApi } from '@/apis/auth.api';
 import { STORAGE_KEYS } from '@/constants/shared.const';
+import { ERole } from '@/models/enums/auth.enum';
 import { IUserInfo } from '@/models/interfaces/auth.interface';
 import {
   getLocalStorage,
@@ -21,7 +22,7 @@ interface IState {
   getters: {
     getIsAuthenticated: () => boolean;
     getUserInfo: () => IUserInfo | undefined;
-    getUserRole: () => string | undefined;
+    getUserRole: () => ERole | undefined;
   };
   isAuthenticated: boolean;
   userInfo?: IUserInfo;
