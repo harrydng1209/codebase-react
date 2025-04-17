@@ -47,6 +47,9 @@ importers:
       react-router:
         specifier: ^7.1.1
         version: 7.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      store2:
+        specifier: ^2.14.4
+        version: 2.14.4
       string-template:
         specifier: ^1.0.0
         version: 1.0.0
@@ -2798,6 +2801,9 @@ packages:
   split2@4.2.0:
     resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
     engines: {node: '>= 10.x'}
+
+  store2@2.14.4:
+    resolution: {integrity: sha512-srTItn1GOvyvOycgxjAnPA63FZNwy0PTyUBFMHRM+hVFltAeoh0LmNBz9SZqUS9mMqGk8rfyWyXn3GH5ReJ8Zw==}
 
   string-argv@0.3.2:
     resolution: {integrity: sha512-aqD2Q0144Z+/RqG52NeHEkZauTAUWJO8c6yTftGJKO3Tja5tUgIfmIl6kExvhtxSDP7fXB6DvzkfMpCd/F3G+Q==}
@@ -6092,6 +6098,8 @@ snapshots:
   source-map-js@1.2.1: {}
 
   split2@4.2.0: {}
+
+  store2@2.14.4: {}
 
   string-argv@0.3.2: {}
 

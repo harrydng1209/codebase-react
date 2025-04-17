@@ -12,9 +12,9 @@ import {
   type AxiosResponse,
   isAxiosError,
 } from 'axios';
+import store2 from 'store2';
 
 import { showToast } from './shared.util';
-import { getLocalStorage } from './storage.util';
 
 interface IAxiosRequestConfig extends AxiosRequestConfig {
   _retry?: boolean;
@@ -120,7 +120,7 @@ export const handleUnauthorizedError = async (
     return;
   }
 
-  const accessToken = getLocalStorage(STORAGE_KEYS.ACCESS_TOKEN);
+  const accessToken = store2.get(STORAGE_KEYS.ACCESS_TOKEN);
   const originalRequest = error.config as IAxiosRequestConfig;
 
   if (originalRequest) {

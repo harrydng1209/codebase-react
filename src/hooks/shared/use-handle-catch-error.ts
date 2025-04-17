@@ -21,7 +21,7 @@ export const useHandleCatchError = () => {
       }
 
       case props instanceof Error:
-        showToast(props.message);
+        showToast(props.message, EToast.Error);
         break;
 
       default:

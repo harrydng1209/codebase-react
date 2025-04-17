@@ -2,11 +2,7 @@ import { profile, refreshToken as refreshTokenApi } from '@/apis/auth.api';
 import { STORAGE_KEYS } from '@/constants/shared.const';
 import { ERole } from '@/models/enums/auth.enum';
 import { IUserInfo } from '@/models/interfaces/auth.interface';
-import {
-  getLocalStorage,
-  removeLocalStorage,
-  setLocalStorage,
-} from '@/utils/storage.util';
+import store2 from 'store2';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
@@ -30,7 +26,7 @@ interface IState {
 
 export const authStore = create<IState>()(
   devtools((set, get) => ({
-    accessToken: getLocalStorage<string>(STORAGE_KEYS.ACCESS_TOKEN),
+    accessToken: store2.get(STORAGE_KEYS.ACCESS_TOKEN),
 
     actions: {
       initialize: async () => {
@@ -53,7 +49,7 @@ export const authStore = create<IState>()(
           isAuthenticated: false,
           userInfo: undefined,
         });
-        removeLocalStorage(STORAGE_KEYS.ACCESS_TOKEN);
+        store2.remove(STORAGE_KEYS.ACCESS_TOKEN);
       },
 
       refreshToken: async (): Promise<boolean> => {
@@ -69,12 +65,7 @@ export const authStore = create<IState>()(
       },
 
       setToken: (token: string) => {
-        if (token === null) {
-          removeLocalStorage(STORAGE_KEYS.ACCESS_TOKEN);
-          set({ accessToken: null });
-          return;
-        }
-        setLocalStorage(STORAGE_KEYS.ACCESS_TOKEN, token);
+        store2.set(STORAGE_KEYS.ACCESS_TOKEN, token);
         set({ accessToken: token });
       },
 

@@ -7,7 +7,6 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { capitalize } from 'lodash-es';
 import { stringify } from 'qs';
-import stringTemplate from 'string-template';
 import { create, StateCreator } from 'zustand';
 
 dayjs.extend(utc);
@@ -88,13 +87,6 @@ export const formatQueryString = (
       ? query
       : stringify(query, { arrayFormat: 'brackets' });
   return `${baseUrl}?${queryString}`;
-};
-
-export const formatString = (
-  template: string,
-  values: TObjectUnknown | unknown[],
-): string => {
-  return stringTemplate(template, values);
 };
 
 export const isFailureResponse = (
