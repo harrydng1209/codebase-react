@@ -22,6 +22,7 @@ import { BaseTable } from '@/components/shared/BaseTable';
 import { BaseTimePicker } from '@/components/shared/BaseTimePicker';
 import { REGEXES, SELECTORS } from '@/constants/shared.const';
 import { DEFAULT } from '@/constants/theme-colors.const';
+import { usePagination } from '@/hooks/shared/use-pagination';
 import { useThemeColor } from '@/hooks/shared/use-theme-color';
 import {
   baseCheckboxOptions,
@@ -104,6 +105,7 @@ export const Codebase: React.FC = () => {
   const { t } = useTranslation();
   const loadingStore = useLoadingStore();
   const { getThemeColor } = useThemeColor();
+  const { pagination, setPagination } = usePagination();
 
   const [baseCheckbox, setBaseCheckbox] = useState<boolean>(false);
   const [baseCheckboxAll, setBaseCheckboxAll] = useState<boolean>(false);
@@ -118,11 +120,6 @@ export const Codebase: React.FC = () => {
   const [baseTimePicker, setBaseTimePicker] = useState<Dayjs | null>(null);
   const [baseModal, setBaseModal] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>('');
-  const [pagination, setPagination] = useState({
-    current: 1,
-    pageSize: 10,
-    total: 1000,
-  });
   const [svgIcons, setSvgIcons] = useState<Record<string, React.FC>>({});
 
   const handleGetHealthCheck = useDebounceCallback(async () => {
@@ -207,7 +204,7 @@ export const Codebase: React.FC = () => {
     page,
     pageSize,
   ) => {
-    setPagination({ current: page, pageSize, total: tableData.length });
+    setPagination({ currentPage: page, pageSize, total: tableData.length });
   };
 
   const onSubmit: SubmitHandler<IForm> = async (values) => {
@@ -237,6 +234,7 @@ export const Codebase: React.FC = () => {
 
   useEffect(() => {
     loadSvgIcons();
+    setPagination((state) => ({ ...state, total: tableData.length }));
   }, []);
 
   return (
@@ -545,7 +543,7 @@ export const Codebase: React.FC = () => {
 
         <BasePagination
           className="tw-mt-4 tw-flex-center"
-          current={pagination.current}
+          current={pagination.currentPage}
           onChange={handleChangePagination}
           pageSize={pagination.pageSize}
           showSizeChanger
