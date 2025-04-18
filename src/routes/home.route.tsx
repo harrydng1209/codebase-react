@@ -13,13 +13,7 @@ export default {
   element: <DefaultLayout />,
   meta: {
     requiresAuth: true,
-    roles: [
-      ERole.Admin,
-      ERole.Guest,
-      ERole.Moderator,
-      ERole.SuperAdmin,
-      ERole.User,
-    ],
+    roles: [ERole.Admin, ERole.Moderator, ERole.SuperAdmin, ERole.User],
     title: 'Home',
   },
   path: HOME,

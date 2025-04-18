@@ -15,7 +15,7 @@ export default {
   ],
   element: isDevelop ? <DefaultLayout /> : <ErrorLayout />,
   meta: {
-    requiresAuth: true,
+    requiresAuth: false,
     roles: [],
     title: 'Codebase',
   },

@@ -1,3 +1,3 @@
 export const Home: React.FC = () => {
-  return <div>Codebase React</div>;
+  return <div>codebase-react</div>;
 };
