@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router';
 export const TheTopbar: React.FC = () => {
   const { changeTheme, isDark } = useTheme();
   const { language, setLanguage } = useLanguage();
-  const authStore = useAuthStore();
+  const logout = useAuthStore((state) => state.logout);
   const navigate = useNavigate();
   const { getThemeColor } = useThemeColor();
 
@@ -70,7 +70,7 @@ export const TheTopbar: React.FC = () => {
   };
 
   const handleLogout = async () => {
-    authStore.logout();
+    logout();
     await navigate(AUTH_PAGES.LOGIN);
   };
 

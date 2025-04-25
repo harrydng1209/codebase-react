@@ -15,7 +15,7 @@ type TRouteObject = RouteObject & {
 };
 
 const ProtectedRoute: React.FC<{ route: TRouteObject }> = ({ route }) => {
-  const authStore = useAuthStore();
+  const initialize = useAuthStore((state) => state.initialize);
 
   const [element, setElement] = useState<React.ReactNode>(null);
 
@@ -24,15 +24,17 @@ const ProtectedRoute: React.FC<{ route: TRouteObject }> = ({ route }) => {
       if (route.meta?.title) document.title = route.meta.title;
 
       if (route.meta?.requiresAuth) {
-        await authStore.initialize();
+        await initialize();
 
-        if (!authStore.getIsAuthenticated()) {
+        const isAuthenticated = useAuthStore.getState().isAuthenticated;
+        const userRole = useAuthStore.getState().userInfo?.role;
+
+        if (!isAuthenticated) {
           setElement(<Navigate replace to={AUTH_PAGES.LOGIN} />);
           return;
         }
 
         const requiresRoles = route.meta.roles || [];
-        const userRole = authStore.getUserRole();
         const hasRequiredRole = requiresRoles.some((role) => role === userRole);
 
         if (requiresRoles.length && !hasRequiredRole) {

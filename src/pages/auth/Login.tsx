@@ -34,7 +34,7 @@ export const Login: React.FC = () => {
     resolver: yupResolver(schema),
   });
   const { t } = useTranslation();
-  const authStore = useAuthStore();
+  const setToken = useAuthStore((state) => state.setToken);
   const navigate = useNavigate();
   const { handleCatchError } = useHandleCatchError();
 
@@ -47,7 +47,7 @@ export const Login: React.FC = () => {
   const onSubmit: SubmitHandler<ILoginRequest> = async (values) => {
     try {
       const response = await login(values);
-      authStore.setToken(response.data.accessToken);
+      setToken(response.data.accessToken);
       await navigate(HOME);
     } catch (error) {
       handleCatchError(error);

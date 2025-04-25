@@ -1,30 +1,13 @@
 import { create } from 'zustand';
 
 interface IState {
-  actions: {
-    hideLoading: () => void;
-    showLoading: () => void;
-  };
-  getters: {
-    getIsLoading: () => boolean;
-  };
+  hideLoading: () => void;
   isLoading: boolean;
+  showLoading: () => void;
 }
 
-export const loadingStore = create<IState>((set, get) => ({
-  actions: {
-    hideLoading: () => set({ isLoading: false }),
-    showLoading: () => set({ isLoading: true }),
-  },
-  getters: {
-    getIsLoading: () => get().isLoading,
-  },
+export const useLoadingStore = create<IState>((set) => ({
+  hideLoading: () => set({ isLoading: false }),
   isLoading: false,
+  showLoading: () => set({ isLoading: true }),
 }));
-
-export const useLoadingStore = () => {
-  const actions = loadingStore((state) => state.actions);
-  const getters = loadingStore((state) => state.getters);
-
-  return { ...actions, ...getters };
-};

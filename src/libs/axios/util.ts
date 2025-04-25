@@ -4,8 +4,8 @@ import { AUTH_PAGES } from '@/constants/route-pages.const';
 import { axiosInstance } from '@/libs/axios/config';
 import { EResponseStatus } from '@/models/enums/auth.enum';
 import { TFailureResponse, TSuccessResponse } from '@/models/types/auth.type';
-import { authStore } from '@/stores/auth.store';
-import { loadingStore } from '@/stores/loading.store';
+import { useAuthStore } from '@/stores/auth.store';
+import { useLoadingStore } from '@/stores/loading.store';
 import { showToast } from '@/utils/shared.util';
 import {
   AxiosError,
@@ -29,10 +29,8 @@ const request = async <D = unknown, M = unknown>(
   loadingTarget?: TLoadingTargets,
   toastMessage?: string,
 ) => {
-  const { actions } = loadingStore.getState();
-
   try {
-    if (loadingTarget) actions.showLoading();
+    if (loadingTarget) useLoadingStore.getState().showLoading();
 
     const response: AxiosResponse<TSuccessResponse<D, M>> = await axiosInstance[
       method
@@ -71,7 +69,7 @@ const request = async <D = unknown, M = unknown>(
     };
     return Promise.reject(result);
   } finally {
-    actions.hideLoading();
+    useLoadingStore.getState().hideLoading();
   }
 };
 
@@ -110,11 +108,10 @@ export const get = async <T = unknown, M = unknown>(
 export const handleUnauthorizedError = async (
   error: AxiosError<TFailureResponse>,
 ) => {
-  const { actions } = authStore.getState();
-  const isTokenRefreshed = await actions.refreshToken();
+  const isTokenRefreshed = await useAuthStore.getState().refreshToken();
 
   if (!isTokenRefreshed) {
-    actions.logout();
+    useAuthStore.getState().logout();
     window.location.href = AUTH_PAGES.LOGIN;
     return;
   }

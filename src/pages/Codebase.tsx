@@ -103,7 +103,8 @@ export const Codebase: React.FC = () => {
     resolver: yupResolver<IForm>(schema),
   });
   const { t } = useTranslation();
-  const loadingStore = useLoadingStore();
+  const hideLoading = useLoadingStore((state) => state.hideLoading);
+  const showLoading = useLoadingStore((state) => state.showLoading);
   const { getThemeColor } = useThemeColor();
   const { pagination, setPagination } = usePagination();
 
@@ -213,9 +214,9 @@ export const Codebase: React.FC = () => {
   };
 
   const handleLoadingFullscreen = async () => {
-    loadingStore.showLoading();
+    showLoading();
     await sleep(3);
-    loadingStore.hideLoading();
+    hideLoading();
   };
 
   const loadSvgIcons = async () => {
