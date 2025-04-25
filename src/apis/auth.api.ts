@@ -6,7 +6,7 @@ import type {
 } from '@/models/interfaces/auth.interface';
 
 import { AUTH_APIS } from '@/constants/route-apis.const';
-import { get, post } from '@/utils/api.util';
+import { get, post } from '@/libs/axios/util';
 
 export const login = async (data: ILoginRequest) => {
   const url = AUTH_APIS.LOGIN;

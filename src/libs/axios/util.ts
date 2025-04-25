@@ -1,11 +1,12 @@
 import type { TLoadingTargets } from '@/models/types/shared.type';
 
-import { apiConfig } from '@/configs/api.config';
 import { AUTH_PAGES } from '@/constants/route-pages.const';
+import { axiosInstance } from '@/libs/axios/config';
 import { EResponseStatus } from '@/models/enums/auth.enum';
 import { TFailureResponse, TSuccessResponse } from '@/models/types/auth.type';
 import { authStore } from '@/stores/auth.store';
 import { loadingStore } from '@/stores/loading.store';
+import { showToast } from '@/utils/shared.util';
 import {
   AxiosError,
   type AxiosRequestConfig,
@@ -13,8 +14,6 @@ import {
   isAxiosError,
 } from 'axios';
 import store2 from 'store2';
-
-import { showToast } from './shared.util';
 
 interface IAxiosRequestConfig extends AxiosRequestConfig {
   _retry?: boolean;
@@ -30,12 +29,12 @@ const request = async <D = unknown, M = unknown>(
   loadingTarget?: TLoadingTargets,
   toastMessage?: string,
 ) => {
-  const actions = loadingStore.getState().actions;
+  const { actions } = loadingStore.getState();
 
   try {
     if (loadingTarget) actions.showLoading();
 
-    const response: AxiosResponse<TSuccessResponse<D, M>> = await apiConfig[
+    const response: AxiosResponse<TSuccessResponse<D, M>> = await axiosInstance[
       method
     ](url, data, config);
 
@@ -129,7 +128,7 @@ export const handleUnauthorizedError = async (
 
     if (!originalRequest._retry) {
       originalRequest._retry = true;
-      await apiConfig(originalRequest);
+      await axiosInstance(originalRequest);
     }
   }
 };

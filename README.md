@@ -29,7 +29,7 @@ This template will help you get started with React in Vite
 
 This project includes several scripts to assist with development:
 
-- `dev`: Start the development server using Vite
+- `dev`: Start the development server
 - `build`: Build the project and perform type checks
 - `preview`: Preview the built project
 - `format`: Format code using Prettier
