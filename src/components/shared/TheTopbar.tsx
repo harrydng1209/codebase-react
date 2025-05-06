@@ -34,10 +34,10 @@ export const TheTopbar: React.FC = () => {
       ...notifications.map((notification) => ({
         key: notification.id,
         label: (
-          <div>
+          <>
             <p>{notification.message}</p>
             <p>{notification.time}</p>
-          </div>
+          </>
         ),
       })),
       {
