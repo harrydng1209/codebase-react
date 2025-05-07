@@ -5,8 +5,6 @@ interface IProps<T> extends TableProps<T> {
   columns: ColumnType<T>[];
 }
 
-export const BaseTable = <T,>(props: IProps<T>) => {
-  const { ...otherProps } = props;
-
+export const BaseTable = <T,>({ ...otherProps }: IProps<T>) => {
   return <Table<T> {...otherProps} />;
 };

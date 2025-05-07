@@ -13,9 +13,7 @@ import enUS from 'antd/locale/en_US';
 interface IProps extends React.PropsWithChildren {}
 type TLocale = ConfigProviderProps['locale'];
 
-export const AntConfigProvider: React.FC<IProps> = (props) => {
-  const { children } = props;
-
+export const AntConfigProvider: React.FC<IProps> = ({ children }) => {
   const { isDark } = useTheme();
   const { getThemeColor } = useThemeColor();
   const [locale, _setLocale] = useState<TLocale>(enUS);

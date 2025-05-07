@@ -7,9 +7,10 @@ interface IProps extends Omit<CheckboxGroupProps, 'options'> {
   options: TOptions[];
 }
 
-export const BaseCheckboxGroup: React.FC<IProps> = (props) => {
-  const { options, ...otherProps } = props;
-
+export const BaseCheckboxGroup: React.FC<IProps> = ({
+  options,
+  ...otherProps
+}) => {
   return (
     <Checkbox.Group {...otherProps}>
       {options.map((item, index) => (

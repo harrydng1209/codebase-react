@@ -5,9 +5,11 @@ interface IProps extends PaginationProps {
   total: number;
 }
 
-export const BasePagination: React.FC<IProps> = (props) => {
-  const { pageSizes = [100, 200, 300, 400], total, ...otherProps } = props;
-
+export const BasePagination: React.FC<IProps> = ({
+  pageSizes = [100, 200, 300, 400],
+  total,
+  ...otherProps
+}) => {
   return (
     <Pagination
       defaultPageSize={100}
